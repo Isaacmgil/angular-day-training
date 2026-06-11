@@ -1,1 +1,9 @@
-<p>profile-card works!</p>,
+<img class="ml-7" [src]="avatarUrl" [alt]="nombreUsuario">
+
+<h2 class="ml-7">{{nombreUsuario}}</h2>
+
+<button
+  class="bg-blue-800 hover:bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-300 ml-7"
+  (click)="saludar()">
+  Saludar
+</button>
