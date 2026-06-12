@@ -10,8 +10,10 @@ export class ProfileCard {
 
   nombreUsuario = 'Isaac Meneses';
   avatarUrl = 'https://mangakaart.fandom.com/es/wiki/Kratos';
-  saludar(){
-    alert(`Hola, ${this.nombreUsuario}! Bienvenido a tu perfil.`);
+  saludar() {
+    this.mostrarInfo = !this.mostrarInfo; // Cambia de true a false, y viceversa
   }
+  mostrarInfo = true;
+  habilidades: string[] = ['Angular', 'TypeScript', 'Tailwind CSS'];
 
 }
