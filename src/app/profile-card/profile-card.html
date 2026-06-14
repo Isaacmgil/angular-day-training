@@ -1,4 +1,4 @@
-<div class="mt-6 p-4 bg-slate-900 rounded-xl max-w-md mx-auto text-white shadow-lg">
+<!-- <div class="mt-6 p-4 bg-slate-900 rounded-xl max-w-md mx-auto text-white shadow-lg">
   <h3 class="text-xl font-bold mb-4 text-blue-400">💸 Historial de Transacciones</h3>
 
   <div class="space-y-3">
@@ -25,6 +25,42 @@
 
     } @empty {
       <p class="text-slate-400 italic text-center py-4">Sin movimientos recientes.</p>
+    }
+
+  </div>
+</div> -->
+<div class="mt-6 p-4 bg-slate-900 rounded-xl max-w-md mx-auto text-white shadow-lg">
+  <h3 class="text-xl font-bold mb-4 text-blue-400">🖥️ Cotizador de Hardware</h3>
+
+  <div class="space-y-3">
+
+    @for (componente of componentes; track componente.nombre) {
+
+      <div class="p-3 bg-slate-800 rounded-lg border border-slate-700">
+
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-semibold text-slate-200"> {{componente.nombre}} </span>
+          <span class="text-emerald-400 font-bold">$ {{componente.precio}} </span>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          @if (componente.enStock) {
+            <span class="text-xs text-emerald-400">✔️ Disponible en tienda</span>
+          } @else {
+            <span class="text-xs text-slate-500">❌ Agotado temporalmente</span>
+          }
+
+          @if (!componente.esCompatible) {
+            <span class="text-xs text-rose-400 bg-rose-950/30 p-1 rounded mt-1">
+              ⚠️ Incompatible con el procesador elegido
+            </span>
+          }
+        </div>
+
+      </div>
+
+    } @empty {
+      <p class="text-slate-400 italic text-center py-4">No hay piezas en el cotizador.</p>
     }
 
   </div>
