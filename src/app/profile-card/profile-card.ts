@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-interface Componente {
-  nombre: string;
+interface Libro {
+  titulo: string;
+  autor: string;
+  stock: number;
   precio: number;
-  enStock: boolean;
-  esCompatible: boolean;
+  categoria: string;
 }
 
 @Component({
@@ -16,12 +17,12 @@ interface Componente {
 
 export class ProfileCard {
 
-componentes: Componente[] = [
-  { nombre: 'AMD Ryzen 7 5700X', precio: 175.50, enStock: true, esCompatible: true },
-  { nombre: 'ASUS ROG STRIX B550-F', precio: 145.00, enStock: true, esCompatible: true },
-  { nombre: 'Memoria RAM Corsair 32GB', precio: 85.00, enStock: false, esCompatible: true },
-  { nombre: 'Motherboard Intel Z790', precio: 220.00, enStock: true, esCompatible: false }
-];
+  libros: Libro[] = [
+    {titulo: 'El señor de los anillos', autor: 'Tolkien', stock: 20, precio: 80, categoria: 'Fantasía'},
+    {titulo: 'Tiburon', autor: 'Spielberg', stock: 10, precio: 30, categoria: 'Ficcion'},
+    {titulo: 'El tunel', autor: 'Ernesto Savato', stock: 8, precio: 25, categoria: 'Ficcion'},
+    {titulo: 'Harry Potter', autor: 'J.K Rowling', stock: 35, precio: 40, categoria: 'Fantasía'},
+  ];
 
   nombreUsuario = 'Isaac Meneses';
   avatarUrl = 'https://mangakaart.fandom.com/es/wiki/Kratos';
@@ -39,6 +40,14 @@ componentes: Componente[] = [
   //   { tipo: 'gasto', descripcion: 'Servidores AWS', monto: 45.00, completado: false },
   //   { tipo: 'ingreso', descripcion: 'Pago Freelance', monto: 300.00, completado: true }
   // ];
+
+  // componentes: Componente[] = [
+  //   { nombre: 'AMD Ryzen 7 5700X', precio: 175.50, enStock: true, esCompatible: true },
+  //   { nombre: 'ASUS ROG STRIX B550-F', precio: 145.00, enStock: true, esCompatible: true },
+  //   { nombre: 'Memoria RAM Corsair 32GB', precio: 85.00, enStock: false, esCompatible: true },
+  //   { nombre: 'Motherboard Intel Z790', precio: 220.00, enStock: true, esCompatible: false }
+  // ];
+
 
 
 
