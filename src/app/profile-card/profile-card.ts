@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { signal } from '@angular/core';
 
 interface Libro {
   titulo: string;
@@ -18,19 +19,25 @@ interface Libro {
 export class ProfileCard {
 
   libros: Libro[] = [
-    {titulo: 'El señor de los anillos', autor: 'Tolkien', stock: 20, precio: 80, categoria: 'Fantasía'},
-    {titulo: 'Tiburon', autor: 'Spielberg', stock: 10, precio: 30, categoria: 'Ficcion'},
-    {titulo: 'El tunel', autor: 'Ernesto Savato', stock: 8, precio: 25, categoria: 'Ficcion'},
-    {titulo: 'Harry Potter', autor: 'J.K Rowling', stock: 35, precio: 40, categoria: 'Fantasía'},
+    { titulo: 'El señor de los anillos', autor: 'Tolkien', stock: 20, precio: 80, categoria: 'Fantasía' },
+    { titulo: 'Tiburon', autor: 'Spielberg', stock: 10, precio: 30, categoria: 'Ficcion' },
+    { titulo: 'El tunel', autor: 'Ernesto Savato', stock: 8, precio: 25, categoria: 'Ficcion' },
+    { titulo: 'Harry Potter', autor: 'J.K Rowling', stock: 35, precio: 40, categoria: 'Fantasía' },
   ];
 
-  nombreUsuario = 'Isaac Meneses';
-  avatarUrl = 'https://mangakaart.fandom.com/es/wiki/Kratos';
-  saludar() {
-    this.mostrarInfo = !this.mostrarInfo; // Cambia de true a false, y viceversa
+  stockLibro = signal<number>(10);
+
+  venderLibro(libro: Libro) {
+    libro.stock = libro.stock - 1;
   }
-  mostrarInfo = true;
-  habilidades: string[] = ['Angular', 'TypeScript', 'Tailwind CSS'];
+
+  // nombreUsuario = 'Isaac Meneses';
+  // avatarUrl = 'https://mangakaart.fandom.com/es/wiki/Kratos';
+  // saludar() {
+  //   this.mostrarInfo = !this.mostrarInfo; // Cambia de true a false, y viceversa
+  // }
+  // mostrarInfo = true;
+  // habilidades: string[] = ['Angular', 'TypeScript', 'Tailwind CSS'];
 
 
 
