@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
 
+interface Libro {
+  titulo: string;
+  categoria: string;
+}
+
 @Component({
   selector: 'app-profile-card',
   imports: [],
@@ -8,18 +13,26 @@ import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/c
 })
 export class ProfileCard {
 
-  precioLibro = 45;
-  cantidad = signal<number>(1);
-  total = computed(() => this.cantidad() * this.precioLibro);
+  inventario = [
+    { titulo: "El Rey León", categoria: 'Fantasía' },
+    { titulo: "Narnia", categoria: 'Fantasía' },
+    { titulo: "El Señor de los Anillos", categoria: 'Ficción' },
+    { titulo: "Hábitos Atómicos", categoria: 'Autoayuda' },
 
-  agregar(){
-    this.cantidad.update(cantidad => cantidad + 1)
-  }
+  ]
 
-  quitar(){
-    if(this.cantidad() > 1){
-      this.cantidad.update(cantidad => cantidad - 1)
+  filtroActivo = signal<string>('Todas');
+  librosFiltrados = computed(() => {
+    const filtroActual = this.filtroActivo();
+
+    if (filtroActual === 'Todas') {
+      return this.inventario;
     }
+    return this.inventario.filter(libro => libro.categoria === filtroActual);
+  });
+
+  cambiarFiltro(nuevaCategoria: string) {
+    this.filtroActivo.set(nuevaCategoria)
   }
 
 

@@ -1,27 +1,39 @@
-<div class="p-6 bg-slate-900 rounded-2xl max-w-sm mx-auto text-white shadow-xl mt-10 border border-slate-800">
-  <h2 class="text-xl font-bold text-blue-400 mb-4">🛒 Carrito Booksflea</h2>
+<div class="p-6 bg-slate-900 rounded-2xl max-w-lg mx-auto text-white shadow-xl mt-10">
+  <h2 class="text-2xl font-bold text-blue-400 mb-6">📚 Catálogo Filtrable</h2>
 
-  <p class="text-slate-300 font-medium">Libro: Angular Avanzado v18</p>
-  <p class="text-emerald-400 font-semibold mb-6">Precio unitario: $ {{ precioLibro }}</p>
-
-  <div class="flex items-center gap-6 mb-6 bg-slate-800 p-3 rounded-lg w-fit">
-    <button class="bg-rose-600 hover:bg-rose-700 transition-colors px-4 py-1 rounded text-lg font-bold"
-            (click)="quitar()">
-      -
+  <div class="flex gap-2 mb-6">
+    <button class="px-4 py-1 bg-slate-700 hover:bg-blue-600 rounded-full text-sm font-semibold transition-colors"
+      (click)="cambiarFiltro('Todas')">
+      Todas
     </button>
 
-    <span class="text-2xl font-bold w-6 text-center">{{cantidad()}}</span>
+    <button class="px-4 py-1 bg-slate-700 hover:bg-blue-600 rounded-full text-sm font-semibold transition-colors"
+      (click)="cambiarFiltro('Fantasía')">
+      Fantasía
+    </button>
 
-    <button class="bg-blue-600 hover:bg-blue-700 transition-colors px-4 py-1 rounded text-lg font-bold"
-            (click)="agregar()">
-      +
+    <button class="px-4 py-1 bg-slate-700 hover:bg-blue-600 rounded-full text-sm font-semibold transition-colors"
+      (click)="cambiarFiltro('Ficción')">
+      Ficción
+    </button>
+
+    <button class="px-4 py-1 bg-slate-700 hover:bg-blue-600 rounded-full text-sm font-semibold transition-colors"
+      (click)="cambiarFiltro('Autoayuda')">
+      Autoayuda
     </button>
   </div>
 
-  <div class="border-t border-slate-700 pt-4">
-    <p class="text-lg text-slate-300">
-      Total a pagar:
-      <span class="font-bold text-emerald-400 text-2xl ml-2">$ {{total()}}</span>
-    </p>
+  <div class="space-y-3">
+    @for (libro of librosFiltrados(); track libro.titulo) {
+    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700 flex justify-between items-center">
+
+      <span class="font-semibold text-slate-200"> {{libro.titulo}} </span>
+      <span class="bg-indigo-900/50 text-indigo-300 px-2 py-1 rounded text-xs">{{libro.categoria}}</span>
+
+    </div>
+    } @empty {
+    <p class="text-slate-400 italic text-center py-4">No hay libros en esta categoría.</p>
+    }
   </div>
+
 </div>
