@@ -1,0 +1,31 @@
+<div class="p-6 bg-slate-900 rounded-2xl max-w-md mx-auto text-white shadow-xl mt-10 border border-slate-800">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-2xl font-bold text-amber-400">📈 Trading Watchlist</h2>
+  </div>
+
+  <p class="text-slate-400 mb-6 font-medium">
+    Activos en seguimiento: <span class="text-white font-bold bg-slate-800 px-2 py-1 rounded">{{totalActivos()}}</span>
+  </p>
+
+  <div class="space-y-3">
+    @for (activo of watchlist(); track activo.id) {
+      <div class="p-4 bg-slate-800 rounded-xl flex justify-between items-center border border-slate-700 hover:border-slate-500 transition-colors">
+
+        <div>
+          <p class="font-bold text-lg text-slate-100">{{activo.simbolo}}</p>
+          <p class="text-sm text-emerald-400 font-mono">$ {{activo.precio}}</p>
+        </div>
+
+        <button class="bg-rose-500/10 text-rose-500 hover:bg-rose-600 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all"
+                (click)="dejarDeSeguir(activo.id)">
+          Dejar de seguir
+        </button>
+
+      </div>
+    } @empty {
+      <div class="text-center py-8 border-2 border-dashed border-slate-700 rounded-xl">
+        <p class="text-slate-500 italic">No tienes activos en tu lista.</p>
+      </div>
+    }
+  </div>
+</div>
