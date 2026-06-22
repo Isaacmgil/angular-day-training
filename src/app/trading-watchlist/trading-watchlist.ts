@@ -22,12 +22,35 @@ export class TradingWatchlist {
     { id: 4, simbolo: 'ETH/USD', precio: 400 },
   ]);
 
-  totalActivos = computed(() => this.watchlist().length);
+  activosDisponibles = signal<Activo[]>([
+    { id: 5, simbolo: 'TSLA/USD', precio: 350 },
+    { id: 6, simbolo: 'AAPL/USD', precio: 120 },
+    { id: 7, simbolo: 'NVDA/USD', precio: 200 },
+    { id: 8, simbolo: 'SMSUG/USD', precio: 500 },
+  ])
 
-  dejarDeSeguir(idActivo: number) {
+  totalActivos = computed(() => this.watchlist().length);
+  totalDisponibles = computed(() => this.activosDisponibles().length);
+
+  dejarDeSeguir(activoRemovido: Activo) {
     this.watchlist.update((listaActual) => {
-      return listaActual.filter(listaActualizada => listaActualizada.id !== idActivo)
+      return listaActual.filter(listaActualizada => listaActualizada.id !== activoRemovido.id)
     })
+
+    this.activosDisponibles.update((listaActual) => {
+      return [...listaActual, activoRemovido]
+    })
+  }
+
+  agregarActivo(nuevoActivo: Activo) {
+    this.activosDisponibles.update((listaActualizada) => {
+      return listaActualizada.filter(activo => activo.id !== nuevoActivo.id)
+    })
+
+    this.watchlist.update((listaActual) => {
+      return [...listaActual, nuevoActivo]
+    })
+
   }
 
 
