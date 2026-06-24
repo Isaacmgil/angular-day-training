@@ -1,0 +1,50 @@
+<div class="max-w-3xl mx-auto mt-10 p-6 bg-slate-900 rounded-3xl border border-slate-800 text-white shadow-2xl">
+
+  <div class="flex justify-between items-end mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-blue-400 mb-2">📜 Historial de Movimientos</h2>
+      <div class="flex gap-4 text-sm font-semibold">
+        <p class="text-emerald-400">Ingresos: $ {{ ingresosTotales() }}</p>
+        <p class="text-rose-400">Gastos: $ {{ gastosTotales() }}</p>
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <button class="px-3 py-1 rounded-lg text-sm transition-colors font-bold"
+              [class.bg-blue-600]="ordenActual() === 'recientes'"
+              [class.bg-slate-700]="ordenActual() !== 'recientes'"
+              (click)="cambiarOrden('recientes')">
+        Más Recientes
+      </button>
+      <button class="px-3 py-1 rounded-lg text-sm transition-colors font-bold"
+              [class.bg-blue-600]="ordenActual() === 'mayor'"
+              [class.bg-slate-700]="ordenActual() !== 'mayor'"
+              (click)="cambiarOrden('mayor')">
+        Mayor Monto
+      </button>
+    </div>
+  </div>
+
+  <div class="space-y-3">
+    @for (movimiento of historialProcesado(); track movimiento.id) {
+      <div class="p-4 rounded-xl flex justify-between items-center border border-slate-700 bg-slate-800/50">
+
+        <div>
+          <p class="font-bold text-slate-200">{{ movimiento.descripcion }}</p>
+          <p class="text-xs text-slate-500">ID de transacción: {{ movimiento.id }}</p>
+        </div>
+
+        <div class="text-right">
+          <p class="font-bold font-mono text-lg"
+             [class.text-emerald-400]="movimiento.tipo === 'ingreso'"
+             [class.text-rose-400]="movimiento.tipo === 'gasto'">
+            {{ movimiento.tipo === 'ingreso' ? '+' : '-' }} $ {{ movimiento.monto }}
+          </p>
+        </div>
+
+      </div>
+    } @empty {
+      <p class="text-center text-slate-500 py-4">No hay movimientos registrados.</p>
+    }
+  </div>
+</div>

@@ -4,10 +4,11 @@ import { ProfileCard} from './profile-card/profile-card';
 import { MoneyGoals } from './money-goals/money-goals';
 import { TradingWatchlist } from './trading-watchlist/trading-watchlist';
 import { BudgetDashboard } from './budget-dashboard/budget-dashboard';
+import { TransactionHistory } from './transaction-history/transaction-history';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard],
+  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard, TransactionHistory],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
