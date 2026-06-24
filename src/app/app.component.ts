@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { ProfileCard} from './profile-card/profile-card';
 import { MoneyGoals } from './money-goals/money-goals';
 import { TradingWatchlist } from './trading-watchlist/trading-watchlist';
+import { BudgetDashboard } from './budget-dashboard/budget-dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist],
+  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

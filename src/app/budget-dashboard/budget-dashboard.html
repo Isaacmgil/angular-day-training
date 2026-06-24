@@ -1,0 +1,59 @@
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-slate-900 rounded-3xl border border-slate-800 shadow-2xl text-white">
+
+  <div class="flex justify-between items-center mb-8 pb-6 border-b border-slate-800">
+    <div>
+      <h2 class="text-2xl font-bold text-emerald-400">📊 Control Mensual</h2>
+      <p class="text-sm mt-1 text-slate-400">
+        Estado actual: <span class="font-bold text-white bg-slate-800 px-2 py-1 rounded">{{estadoPresupuesto()}}</span>
+      </p>
+    </div>
+
+    <button class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-xl font-bold transition-colors shadow-lg"
+            (click)="aumentarPresupuesto(500)">
+      + Añadir $500
+    </button>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 mb-8">
+    <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 text-center">
+      <p class="text-slate-400 text-sm font-semibold mb-1">Presupuesto</p>
+      <p class="text-2xl font-bold text-blue-400">$ {{ presupuestoMensual()}}</p>
+    </div>
+
+    <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 text-center">
+      <p class="text-slate-400 text-sm font-semibold mb-1">Total Gastado</p>
+      <p class="text-2xl font-bold text-rose-400">$ {{ totalGastado()}}</p>
+    </div>
+
+    <div class="p-4 bg-slate-800 rounded-2xl border border-slate-700 text-center">
+      <p class="text-slate-400 text-sm font-semibold mb-1">Saldo Restante</p>
+      <p class="text-2xl font-bold text-amber-400">$ {{ saldoRestante()}}</p>
+    </div>
+  </div>
+
+  <div>
+    <h3 class="text-lg font-bold text-slate-300 mb-4">💸 Desglose de Gastos</h3>
+    <div class="space-y-3">
+
+      @for (gasto of gastos(); track gasto.id) {
+        <div class="p-4 bg-slate-800/50 rounded-xl flex justify-between items-center border border-slate-700 hover:bg-slate-800 transition-colors">
+          <p class="font-semibold text-slate-200">{{gasto.descripcion}}</p>
+
+          <div class="flex items-center gap-4">
+            <span class="text-rose-400 font-mono font-bold">$ {{ gasto.monto }}</span>
+            <button class="text-slate-500 hover:text-rose-500 p-2 rounded-lg hover:bg-rose-500/10 transition-colors"
+                    (click)="eliminarGasto(gasto.id)">
+              ✖
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <div class="text-center py-6 border-2 border-dashed border-slate-700 rounded-xl">
+          <p class="text-slate-500 italic">No tienes gastos registrados.</p>
+        </div>
+      }
+
+    </div>
+  </div>
+
+</div>
