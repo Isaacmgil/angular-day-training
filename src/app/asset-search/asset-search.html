@@ -1,0 +1,18 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-slate-900 rounded-2xl border border-slate-800">
+  <h2 class="text-xl font-bold text-white mb-4">🔍 Buscar Activo</h2>
+
+  <input type="text"
+         placeholder="Ej: BTC..."
+         class="w-full p-3 bg-slate-800 border border-slate-700 rounded-xl text-white mb-6 focus:outline-none focus:border-blue-500"
+         (input)="searchTerm.set($any($event.target).value)">
+
+  <div class="space-y-2">
+    @for (activo of activosFiltrados(); track activo.id) {
+      <div class="p-3 bg-slate-800 rounded-lg text-slate-300 font-mono border border-slate-700">
+        {{ activo.simbolo }}
+      </div>
+    } @empty {
+      <p class="text-slate-500 italic text-center">No se encontraron resultados.</p>
+    }
+  </div>
+</div>
