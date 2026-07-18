@@ -1,5 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { Assets } from '../services/assets';
 
 @Component({
   selector: 'app-asset-search',
@@ -8,30 +9,21 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssetSearch {
+  private assetService = inject(Assets);
 
-  activos = signal([
-    { id: 1, simbolo: 'BTC/USD', tipo: 'ingreso' },
-    { id: 2, simbolo: 'ETH/USD', tipo: 'ingreso' },
-    { id: 3, simbolo: 'XRP/USD', tipo: 'gasto' },
-    { id: 4, simbolo: 'LTC/USD', tipo: 'ingreso' },
-    { id: 5, simbolo: 'BCH/USD', tipo: 'gasto' },
-    { id: 6, simbolo: 'ADA/USD', tipo: 'gasto' },
-  ]);
+  searchTerm = this.assetService.searchTerm;
+  activosFiltrados = this.assetService.activosFiltrados;
+  tiposFiltro = this.assetService.tiposFiltro;
+  tipoSeleccionado = this.assetService.tipoSeleccionado;
 
-  searchTerm = signal('');
-  tiposFiltro = ['todos', 'ingreso', 'gasto'] as const;
-  tipoSeleccionado = signal<'todos' | 'ingreso' | 'gasto'>('todos');
+agregarActivo(simbolo: string, tipo: string) {
+  const tipoValido = tipo as 'ingreso' | 'gasto';
 
-  activosFiltrados = computed(() => {
-    const termino = this.searchTerm().toLowerCase();
-    return this.activos().filter(activo =>
-      (activo.simbolo.toLowerCase().includes(termino)) && (this.tipoSeleccionado() === 'todos' || activo.tipo === this.tipoSeleccionado())
-    );
+  this.assetService.agregarActivo({
+    id: Date.now(),
+    simbolo: simbolo,
+    tipo: tipoValido
   });
-
-
-
-
-
+}
 
 }

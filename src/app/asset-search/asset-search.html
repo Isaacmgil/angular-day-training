@@ -6,16 +6,15 @@
     (input)="searchTerm.set($any($event.target).value)">
 
   <!-- Botones de filtrado -->
-<div class="flex gap-2 mb-6">
-  @for (opcion of tiposFiltro; track opcion) {
+  <div class="flex gap-2 mb-6">
+    @for (opcion of tiposFiltro; track opcion) {
     <button class="px-4 py-1 rounded-lg text-sm font-bold transition-all border border-slate-600"
-            [class.bg-blue-600]="tipoSeleccionado() === opcion"
-            [class.bg-slate-700]="tipoSeleccionado() !== opcion"
-            (click)="tipoSeleccionado.set(opcion)">
+      [class.bg-blue-600]="tipoSeleccionado() === opcion" [class.bg-slate-700]="tipoSeleccionado() !== opcion"
+      (click)="tipoSeleccionado.set(opcion)">
       {{ opcion | titlecase }}
     </button>
-  }
-</div>
+    }
+  </div>
 
   <div class="space-y-2">
     @for (activo of activosFiltrados(); track activo.id) {
@@ -27,3 +26,22 @@
     }
   </div>
 </div>
+
+  <div class="max-w-md mx-auto mt-5 mb-5 p-6 bg-slate-900 rounded-2xl border border-slate-800 text-white">
+    <h2 class="text-xl font-bold mb-4">➕ Agregar Nuevo Activo</h2>
+
+    <div class="flex flex-col gap-3">
+      <input type="text" #inputSimbolo placeholder="Símbolo (ej: SOL/USD)"
+        class="p-3 bg-slate-800 border border-slate-700 rounded-lg">
+
+      <select #selectTipo class="p-3 bg-slate-800 border border-slate-700 rounded-lg">
+        <option value="ingreso">Ingreso</option>
+        <option value="gasto">Gasto</option>
+      </select>
+
+      <button class="bg-blue-600 hover:bg-blue-500 py-3 rounded-lg font-bold transition-all"
+        (click)="agregarActivo(inputSimbolo.value, selectTipo.value)">
+        Registrar Activo
+      </button>
+    </div>
+  </div>
