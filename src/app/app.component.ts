@@ -6,10 +6,11 @@ import { TradingWatchlist } from './trading-watchlist/trading-watchlist';
 import { BudgetDashboard } from './budget-dashboard/budget-dashboard';
 import { TransactionHistory } from './transaction-history/transaction-history';
 import { AssetSearch } from './asset-search/asset-search';
+import { Workout } from './workout/workout';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard, TransactionHistory, AssetSearch],
+  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard, TransactionHistory, AssetSearch, Workout],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,0 +1,70 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-zinc-900 rounded-2xl border border-zinc-800 text-white">
+  <h2 class="text-xl font-bold mb-4">Registro de Entrenamiento</h2>
+
+  <!-- Formulario para agregar -->
+  <div class="flex gap-2 mb-6">
+    <input type="text" #inputNombre placeholder="Ej: Curl de bíceps"
+           class="w-full p-2 bg-zinc-800 rounded-lg text-white">
+
+    <select #selectGrupo class="p-2 bg-zinc-800 rounded-lg text-white">
+      <option value="brazos">Brazos</option>
+      <option value="piernas">Piernas</option>
+      <option value="pecho">Pecho</option>
+      <option value="espalda">Espalda</option>
+    </select>
+
+    <button class="px-4 py-2 bg-indigo-600 rounded-lg font-bold"
+            (click)="guardarEjercicio(inputNombre.value, selectGrupo.value)">
+      Añadir
+    </button>
+  </div>
+
+  <!-- Botones de filtro -->
+<div class="flex gap-2 mb-4">
+  <button (click)="cambiarFiltro('todos')"
+          [class.bg-indigo-600]="filtroActual() === 'todos'"
+          [class.bg-zinc-800]="filtroActual() !== 'todos'"
+          class="px-3 py-1 rounded-lg transition-colors">
+    Todos
+  </button>
+
+  <button (click)="cambiarFiltro('piernas')"
+          [class.bg-indigo-600]="filtroActual() === 'piernas'"
+          [class.bg-zinc-800]="filtroActual() !== 'piernas'"
+          class="px-3 py-1 rounded-lg transition-colors">
+    Piernas
+  </button>
+
+    <button (click)="cambiarFiltro('brazos')"
+          [class.bg-indigo-600]="filtroActual() === 'brazos'"
+          [class.bg-zinc-800]="filtroActual() !== 'brazos'"
+          class="px-3 py-1 rounded-lg transition-colors">
+    Brazos
+  </button>
+
+  <button (click)="cambiarFiltro('pecho')"
+          [class.bg-indigo-600]="filtroActual() === 'pecho'"
+          [class.bg-zinc-800]="filtroActual() !== 'pecho'"
+          class="px-3 py-1 rounded-lg transition-colors">
+    Pecho
+  </button>
+
+  <button (click)="cambiarFiltro('espalda')"
+          [class.bg-indigo-600]="filtroActual() === 'espalda'"
+          [class.bg-zinc-800]="filtroActual() !== 'espalda'"
+          class="px-3 py-1 rounded-lg transition-colors">
+    Espalda
+  </button>
+
+</div>
+
+  <!-- Lista de Ejercicios -->
+  <div class="space-y-2">
+    @for (ejercicio of ejerciciosVisibles(); track ejercicio.id) {
+      <div class="p-3 bg-zinc-800 rounded-lg flex justify-between">
+        <span>{{ ejercicio.nombre }}</span>
+        <span class="text-xs text-indigo-400 uppercase">{{ ejercicio.grupoMuscular }}</span>
+      </div>
+    }
+  </div>
+</div>
