@@ -10,20 +10,25 @@
 
     <div class="space-y-3">
       @for (activo of watchlist(); track activo.id) {
-        <div class="p-4 bg-slate-800 rounded-xl flex justify-between items-center border border-slate-700">
-          <div>
-            <p class="font-bold text-slate-100">{{ activo.simbolo }}</p>
-            <p class="text-sm text-emerald-400 font-mono">$ {{ activo.precio }}</p>
-          </div>
-          <button class="bg-rose-500/10 text-rose-500 hover:bg-rose-600 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all"
-                  (click)="dejarDeSeguir(activo)">
-            Quitar
-          </button>
+      <div class="p-4 bg-slate-800 rounded-xl flex justify-between items-center border border-slate-700">
+        <div>
+          <p class="font-bold text-slate-100">{{ activo.simbolo }}</p>
+          <p class="text-sm font-mono" [class.text-emerald-400]="activo.tendencia === 'alcista'"
+            [class.text-rose-500]="activo.tendencia === 'bajista'"
+            [class.text-slate-400]="activo.tendencia === 'lateral'">
+            {{ activo.precio | currency:'USD'}}
+          </p>
         </div>
+        <button
+          class="bg-rose-500/10 text-rose-500 hover:bg-rose-600 hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all"
+          (click)="dejarDeSeguir(activo)">
+          Quitar
+        </button>
+      </div>
       } @empty {
-        <div class="text-center py-8 border-2 border-dashed border-slate-700 rounded-xl">
-          <p class="text-slate-500 italic">No sigues ningún activo.</p>
-        </div>
+      <div class="text-center py-8 border-2 border-dashed border-slate-700 rounded-xl">
+        <p class="text-slate-500 italic">No sigues ningún activo.</p>
+      </div>
       }
     </div>
   </div>
@@ -38,20 +43,26 @@
 
     <div class="space-y-3">
       @for (activo of activosDisponibles(); track activo.id) {
-        <div class="p-4 bg-slate-800/50 rounded-xl flex justify-between items-center border border-slate-700 border-dashed hover:border-solid hover:border-blue-500 transition-all">
-          <div>
-            <p class="font-bold text-slate-300">{{ activo.simbolo }}</p>
-            <p class="text-sm text-emerald-400/70 font-mono">$ {{ activo.precio }}</p>
-          </div>
-          <button class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all shadow-lg"
-                  (click)="agregarActivo(activo)">
-            Añadir
-          </button>
+      <div
+        class="p-4 bg-slate-800/50 rounded-xl flex justify-between items-center border border-slate-700 border-dashed hover:border-solid hover:border-blue-500 transition-all">
+        <div>
+          <p class="font-bold text-slate-300">{{ activo.simbolo }}</p>
+          <p class="text-sm font-mono" [class.text-emerald-400]="activo.tendencia === 'alcista'"
+            [class.text-rose-500]="activo.tendencia === 'bajista'"
+            [class.text-slate-400]="activo.tendencia === 'lateral'">
+            {{ activo.precio | currency:'USD'}}
+          </p>
         </div>
+        <button
+          class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all shadow-lg"
+          (click)="agregarActivo(activo)">
+          Añadir
+        </button>
+      </div>
       } @empty {
-        <div class="text-center py-8 border-2 border-dashed border-slate-700 rounded-xl">
-          <p class="text-slate-500 italic">¡Has añadido todo el catálogo!</p>
-        </div>
+      <div class="text-center py-8 border-2 border-dashed border-slate-700 rounded-xl">
+        <p class="text-slate-500 italic">¡Has añadido todo el catálogo!</p>
+      </div>
       }
     </div>
   </div>
