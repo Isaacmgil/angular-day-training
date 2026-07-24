@@ -7,10 +7,11 @@ import { BudgetDashboard } from './budget-dashboard/budget-dashboard';
 import { TransactionHistory } from './transaction-history/transaction-history';
 import { AssetSearch } from './asset-search/asset-search';
 import { Workout } from './workout/workout';
+import { MovieDashboard } from './movie-dashboard/movie-dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard, TransactionHistory, AssetSearch, Workout],
+  imports: [RouterOutlet, ProfileCard, MoneyGoals, TradingWatchlist, BudgetDashboard, TransactionHistory, AssetSearch, Workout, MovieDashboard],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

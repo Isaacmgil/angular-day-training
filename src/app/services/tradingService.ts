@@ -21,14 +21,14 @@ export class TradingService {
     { id: 5, simbolo: 'TSLA', precio: 700, tendencia: 'bajista' },
   ])
 
-    watchlist = signal<Activo[]>([
+  watchlist = signal<Activo[]>([
+  ]);
+
+  activosDisponibles = signal<Activo[]>([
     { id: 1, simbolo: 'XAU/USD', precio: 50, tendencia: 'alcista' },
     { id: 2, simbolo: 'BTC/USDT', precio: 100, tendencia: 'bajista' },
     { id: 3, simbolo: 'XAU/USDT', precio: 200, tendencia: 'lateral' },
     { id: 4, simbolo: 'ETH/USD', precio: 400, tendencia: 'alcista' },
-  ]);
-
-  activosDisponibles = signal<Activo[]>([
     { id: 5, simbolo: 'TSLA/USD', precio: 350, tendencia: 'alcista' },
     { id: 6, simbolo: 'AAPL/USD', precio: 120, tendencia: 'lateral' },
     { id: 7, simbolo: 'NVDA/USD', precio: 200, tendencia: 'bajista' },
