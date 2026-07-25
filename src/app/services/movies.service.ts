@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
 
 interface Pelicula {
   id: number;
@@ -13,9 +13,37 @@ interface Pelicula {
 })
 export class MoviesService {
 
-  listaPeliculas = signal<Pelicula[]>([
+  listaPeliculas = signal<Pelicula[]>(
+    JSON.parse(localStorage.getItem('misPeliculas') ?? '[]')
+  );
 
-  ]);
+  totalPeliculas = computed(() => {
+    return this.listaPeliculas().length;
+  })
+
+  peliculasVistas = computed(() => {
+    const peliculaVista = this.listaPeliculas().filter((pelicula) => {
+      return pelicula.vista === true;
+    })
+    return peliculaVista.length;
+  });
+
+  peliculasPendientes = computed(() => {
+    const peliculaNoVista = this.listaPeliculas().filter((pelicula) => {
+      return pelicula.vista === false;
+    })
+    return peliculaNoVista.length;
+  })
+
+  constructor() {
+    effect(() => {
+      // 1. Convertimos la lista de películas a texto (JSON)
+      const listaEnTexto = JSON.stringify(this.listaPeliculas());
+
+      // 2. Lo guardamos en el navegador bajo el nombre 'misPeliculas'
+      localStorage.setItem('misPeliculas', listaEnTexto);
+    });
+  }
 
   agregarPelicula(tituloNuevo: string, generoNuevo: string) {
     this.listaPeliculas.update((listaActual) => {
