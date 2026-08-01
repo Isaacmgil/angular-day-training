@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-dashboard',
@@ -18,6 +19,8 @@ export class MovieDashboard {
 
   })
 
+  buscadorControl = new FormControl('');
+
   guardarPelicula() {
     // Podemos preguntar si todo el formulario está correcto
     if (this.formularioMovie.valid) {
@@ -30,6 +33,25 @@ export class MovieDashboard {
     this.formularioMovie.reset();
 
   }
+
+  textoBusqueda = signal('');
+
+  constructor() {
+    this.buscadorControl.valueChanges
+      .pipe(
+        debounceTime(600)
+      )
+      .subscribe((textoBuscado) => {
+        this.textoBusqueda.set(textoBuscado?.toLowerCase() || '');
+      });
+  }
+
+  peliculasFiltradas = computed(() => {
+    return this.moviesservice.listaPeliculas().filter((pelicula) => {
+      return pelicula.titulo.toLowerCase().includes(this.textoBusqueda())
+    })
+  })
+
 
 
 }
